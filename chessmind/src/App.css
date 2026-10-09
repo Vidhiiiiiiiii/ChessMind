@@ -1,0 +1,334 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #f4f4f5;
+  background: #111113;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #111113;
+}
+
+button {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+/* ---------------- TOP BAR ---------------- */
+
+.topbar {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.subtitle {
+  margin-top: 4px;
+  color: #a1a1aa;
+  font-size: 14px;
+}
+
+.new-game-button,
+.reset-button {
+  border: none;
+  border-radius: 10px;
+  padding: 11px 18px;
+  background: #f4f4f5;
+  color: #18181b;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.new-game-button:hover,
+.reset-button:hover {
+  background: #d4d4d8;
+}
+
+/* ---------------- MAIN ---------------- */
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(400px, 680px) 300px;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ---------------- CHESS BOARD ---------------- */
+
+.game-area {
+  width: 100%;
+}
+
+.board-wrapper {
+  width: 100%;
+}
+
+.board {
+  width: min(100%, 680px);
+  aspect-ratio: 1 / 1;
+
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+
+  border: 5px solid #09090b;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+.square {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.light {
+  background: #f0d9b5;
+}
+
+.dark {
+  background: #b58863;
+}
+
+/* ---------------- PIECES ---------------- */
+
+.piece {
+  position: relative;
+  z-index: 3;
+
+  font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", sans-serif;
+  font-size: clamp(35px, 7vw, 70px);
+  line-height: 1;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+.white-piece {
+  color: #fff;
+  text-shadow:
+    0 2px 2px #000,
+    0 3px 4px rgba(0, 0, 0, 0.45);
+}
+
+.black-piece {
+  color: #171717;
+  text-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* ---------------- SELECTION ---------------- */
+
+.square.selected {
+  box-shadow: inset 0 0 0 5px rgba(255, 220, 70, 0.9);
+}
+
+/* Last move */
+
+.square.last-move {
+  background: #cdd16b;
+}
+
+.square.last-move.dark {
+  background: #aaa23f;
+}
+
+/* Check */
+
+.square.in-check {
+  background: #d44;
+}
+
+/* ---------------- MOVE INDICATORS ---------------- */
+
+.move-indicator {
+  position: absolute;
+  width: 22%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+
+.capture-indicator {
+  position: absolute;
+  inset: 7%;
+  border: 5px solid rgba(0, 0, 0, 0.28);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+/* ---------------- COORDINATES ---------------- */
+
+.rank-label,
+.file-label {
+  position: absolute;
+  z-index: 4;
+  font-size: 12px;
+  font-weight: 800;
+  pointer-events: none;
+}
+
+.rank-label {
+  top: 4px;
+  left: 5px;
+}
+
+.file-label {
+  right: 5px;
+  bottom: 3px;
+}
+
+.light-label {
+  color: #b58863;
+}
+
+.dark-label {
+  color: #f0d9b5;
+}
+
+/* ---------------- PLAYER LABELS ---------------- */
+
+.player-label {
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-weight: 700;
+}
+
+.turn-indicator {
+  color: #a1a1aa;
+  font-size: 13px;
+}
+
+/* ---------------- SIDE PANEL ---------------- */
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.panel {
+  padding: 20px;
+  border: 1px solid #27272a;
+  border-radius: 14px;
+  background: #18181b;
+}
+
+.panel h2 {
+  margin: 0 0 16px;
+  font-size: 19px;
+}
+
+.panel h3 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #a1a1aa;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.status {
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background: #27272a;
+  font-weight: 700;
+  text-align: center;
+}
+
+.empty-history {
+  color: #71717a;
+  font-size: 14px;
+}
+
+.moves {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.move-row {
+  display: grid;
+  grid-template-columns: 35px 1fr 1fr;
+  padding: 7px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.move-row:nth-child(even) {
+  background: #202023;
+}
+
+.move-row span:first-child {
+  color: #71717a;
+}
+
+.reset-button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.coming-soon p {
+  margin: 0;
+  color: #a1a1aa;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width: 850px) {
+  .app {
+    padding: 14px;
+  }
+
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+
+  .side-panel {
+    width: 100%;
+  }
+
+  .board {
+    width: 100%;
+  }
+
+  .topbar {
+    margin-bottom: 15px;
+  }
+}
